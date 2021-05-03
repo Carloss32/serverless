@@ -5,18 +5,12 @@ const { exec } = require("child_process");
 
 
 exports.handler = (event, handler, callback) => {
+       
+ //var input = "test"
+    var input = event.queryStringParameters.input.trim();
+
         
-
-   value = "teststring"
-
-if (!/^[a-z0-9 .-]*$/i.test(value)) {
-        console.log('Bad input for ' + input);
-        callback(null, {
-                statusCode: 400,
-                body: "Please provide only letters, numbers, periods, dashes, and spaces"
-        });
-}
-  
+ 
    
     // command to compute md5 of provided input
     // md5sum requires stdin, so this echos and pipes the value to md5sum
@@ -29,7 +23,15 @@ if (!/^[a-z0-9 .-]*$/i.test(value)) {
       
     // execute the full command
     exec(cmd, (error, stdout, stderr) => {
+ value = "teststring"
 
+if (!/^[a-z0-9 .-]*$/i.test(value)) {
+        console.log('Bad input for ' + input);
+        callback(null, {
+                statusCode: 400,
+                body: "Please provide only letters, numbers, periods, dashes, and spaces"
+        });
+}
         // there was an error, so return the error message
         if (error) {
             callback(null, {
