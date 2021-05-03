@@ -3,6 +3,9 @@
 const { exec } = require("child_process");
 
 
+
+exports.handler = (event, handler, callback) => {
+        
 value = "teststring"
 
 if (!/^[a-z0-9 .-]*$/i.test(value)) {
@@ -12,9 +15,6 @@ if (!/^[a-z0-9 .-]*$/i.test(value)) {
                 body: "Please provide only letters, numbers, periods, dashes, and spaces"
         });
 }
-
-
-exports.handler = (event, handler, callback) => {
 
     //var input = "test"
     var input = event.queryStringParameters.input.trim();
