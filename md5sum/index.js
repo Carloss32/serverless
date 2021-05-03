@@ -4,16 +4,7 @@ const { exec } = require("child_process");
 
 exports.handler = (event, handler, callback) => {
 
-    value = "teststring"
-
-if (!/^[a-z0-9 .-]*$/i.test(value)) {
-        console.log('Bad input for ' + input);
-        callback(null, {
-                statusCode: 400,
-                body: "Please provide only letters, numbers, periods, dashes, and spaces"
-        });
-}
-
+  
     //var input = "test"
     var input = event.queryStringParameters.input.trim();
 
@@ -22,6 +13,16 @@ if (!/^[a-z0-9 .-]*$/i.test(value)) {
     // added sed to remove the trailing " -" that md5sum adds to output
     // added -n because echo includes a newline, causing md5sum to be wrong
     var cmd = 'echo -n "' + input + '" | md5sum | sed "s/ -//"';
+    
+      value = "teststring"
+
+if (!/^[a-z0-9 .-]*$/i.test(value)) {
+        console.log('Bad input for ' + input);
+        callback(null, {
+                statusCode: 400,
+                body: "Please provide only letters, numbers, periods, dashes, and spaces"
+        });
+}
 
     // execute the full command
     exec(cmd, (error, stdout, stderr) => {
